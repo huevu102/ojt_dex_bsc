@@ -14,37 +14,17 @@ const web3 = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545/');
   };
   
   // get balance of token (BEP20)
-  const getTokenBalance = (walletAddress, tokenAddress) => {
-    const balanceOfABI = [
-      {
-        "constant": true,
-        "inputs": [
-          {
-            "internalType": "address",
-            "name": "account",
-            "type": "address"
-          }
-        ],
-        "name": "balanceOf",
-        "outputs": [
-          {
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-          }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-      }
-    ];
+  const getTokenBalance = async (walletAddress, tokenAddress) => {
+    const tokenABI = require('../ABI/TokenABI.json');
     
-    const contract = new web3.eth.Contract(balanceOfABI, tokenAddress);
-    const result = contract.methods.balanceOf(walletAddress).call()
-    // .then((result) => {
-    //   console.log(`Token balance: ${web3.utils.fromWei(result, 'ether')}`);
-    // });
-    return result
+    const contract = new web3.eth.Contract(tokenABI, tokenAddress);
+    const balance = await contract.methods.balanceOf(walletAddress).call();
+
+    //get decimals value
+    const decimals = await contract.methods.decimals().call();
+
+    const result = balance / 10 ** decimals;
+    return result;
   }
 
 module.exports = { getBNBBalance, getTokenBalance };

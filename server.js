@@ -2,14 +2,14 @@ const Web3 = require('web3');
 const web3 = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545/');
 
 
-const walletAddress = 'xxxxxxx';
-const privateKey = 'xxxxxxx';
+const walletAddress = 'xxxxx';
+const privateKey = 'xxxxx';
 
-const ETHTokenAddress = 'xxxxxxx';
-const USDTTokenAddress = 'xxxxxxx';
-const BUSDTokenAddress = 'xxxxxxx';
+const ETHTokenAddress = 'xxxxx';
+const USDTTokenAddress = 'xxxxx';
+const BUSDTokenAddress = 'xxxxx';
 
-const recipientWalletAddress = 'xxxxxxx';
+const recipientWalletAddress = 'xxxxx';
 
 // create new wallet
 const { createNewWallet } = require('./controllers/create_new_wallet');
@@ -23,19 +23,18 @@ getBNBBalance(walletAddress);
 // ETH balance
 getTokenBalance(walletAddress, ETHTokenAddress)
   .then((result) => {
-    console.log(`ETH balance: ${web3.utils.fromWei(result, 'ether')}`)
+    console.log(`ETH balance: ${result}`)  
   });
 // USDT balance
 getTokenBalance(walletAddress, USDTTokenAddress)
   .then((result) => {
-    console.log(`USDT balance: ${web3.utils.fromWei(result, 'ether')}`)
+    console.log(`USDT balance: ${result}`)
   });
 // BUSD balance
 getTokenBalance(walletAddress, BUSDTokenAddress)
   .then((result) => {
-    console.log(`BUSD balance: ${web3.utils.fromWei(result, 'ether')}`)
+    console.log(`BUSD balance: ${result}`)
   });
-
 
 // transfer
 const { transferBNB, transferToken } = require('./controllers/transfer');
@@ -47,4 +46,4 @@ const { transferBNB, transferToken } = require('./controllers/transfer');
 
 // swap tokens
 const { swapTokens } = require('./controllers/swap');
-// swapTokens(walletAddress, privateKey, USDTTokenAddress, ETHTokenAddress, '10');
+// swapTokens(walletAddress, privateKey, ETHTokenAddress, USDTTokenAddress, '0.01');

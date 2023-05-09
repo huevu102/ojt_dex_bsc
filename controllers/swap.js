@@ -11,6 +11,7 @@ const swapTokens = async (walletAddress, privateKey, tokenInAddress, tokenOutAdd
 
   // create contract instances
   const pancakeRouterContract = new web3.eth.Contract(pancakeRouterABI, pancakeRouterAddress);
+  const tokenContract = new web3.eth.Contract(tokenABI, tokenInAddress);
 
   try {
     const account = web3.eth.accounts.privateKeyToAccount(privateKey);
@@ -18,11 +19,14 @@ const swapTokens = async (walletAddress, privateKey, tokenInAddress, tokenOutAdd
     web3.eth.defaultAccount = account.address;
 
     const balanceAmount = await getTokenBalance(walletAddress, tokenInAddress);
-    const swapAmount = await web3.utils.toWei(amountIn);
+    
 
     if (balanceAmount < amountIn) {
       console.log('Insufficient input token balance.');
     } else {
+      const decimals = await tokenContract.methods.decimals().call();
+      const swapAmount = (amountIn * (10 ** decimals)).toString();
+      
       pancakeRouterContract.methods.swapExactTokensForTokens(
         swapAmount,
         0,

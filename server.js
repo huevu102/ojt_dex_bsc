@@ -1,9 +1,9 @@
 const walletAddress = 'xxxxx';
 const privateKey = 'xxxxx';
 
-const ETHTokenAddress = 'xxxxx';
-const USDTTokenAddress = 'xxxxx';
-const BUSDTokenAddress = 'xxxxx';
+const ETHTokenAddress = '0x8BaBbB98678facC7342735486C851ABD7A0d17Ca';
+const USDTTokenAddress = '0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684';
+const BUSDTokenAddress = '0xaB1a4d4f1D656d2450692D237fdD6C7f9146e814';
 
 const recipientWalletAddress = 'xxxxx';
 
@@ -35,7 +35,7 @@ getTokenBalance(walletAddress, BUSDTokenAddress)
 // transfer
 const { transferBNB, transferToken } = require('./controllers/transfer');
 // transferBNB(walletAddress, recipientWalletAddress, privateKey, '0.001');
-// transferToken(walletAddress, recipientWalletAddress, ETHTokenAddress, privateKey, '0.1');
+// transferToken(walletAddress, recipientWalletAddress, ETHTokenAddress, privateKey, '1');
 // transferToken(walletAddress, recipientWalletAddress, USDTTokenAddress, privateKey, '10');
 // transferToken(walletAddress, recipientWalletAddress, BUSDTokenAddress, privateKey, '100');
 

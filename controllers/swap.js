@@ -26,7 +26,7 @@ const swapTokens = async (walletAddress, privateKey, tokenInAddress, tokenOutAdd
     } else {
       const decimals = await tokenContract.methods.decimals().call();
       const swapAmount = (amountIn * (10 ** decimals)).toString();
-      
+
       pancakeRouterContract.methods.swapExactTokensForTokens(
         swapAmount,
         0,
@@ -36,8 +36,6 @@ const swapTokens = async (walletAddress, privateKey, tokenInAddress, tokenOutAdd
         .then((swapReceipt) => {
         console.log('Swap transaction hash:', swapReceipt.transactionHash);
         })
-
-      // console.log('Swap transaction submitted.'); 
     }
   } catch (error) {
     console.error(error);
